@@ -1,0 +1,32 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> st = new Stack<>();
+
+        for (int i=0; i<s.length(); i++) {
+            char curr = s.charAt(i);
+            if (isOpeningBracket(curr)){
+                st.push(curr);
+            }
+            else{
+                if (st.isEmpty()){
+                    return false;
+                }
+                else if (!isMatching(st.peek(),curr)){
+                    return false;
+                }
+                else{
+                    st.pop();
+                }
+            }
+        }
+        return st.isEmpty();
+    }
+    
+    public boolean isOpeningBracket(char c) {
+        return c == '(' || c == '{' || c == '[';
+    }
+
+    public boolean isMatching(char a, char b){
+        return (a =='(' && b==')') || (a=='{' && b=='}') || (a=='[' && b==']');
+    }
+}
